@@ -1,0 +1,54 @@
+.title_box
+{
+    color: rgb(0, 145, 255); font-size:32px;
+    background-color: rgb(105, 213, 240);
+    width: 31%; margin: auto;
+    padding: 25px 40px 25px 40px;
+    text-align: center;
+    border-radius: 5px;
+    margin: auto;
+}
+.class_button2
+{
+    background-color:rgb(249, 251, 141);
+    padding: 10px;
+    border-radius: 5px;
+    border-color: rgb(249, 251, 141);
+    color: black;
+}
+.div_class
+{
+    background-color: rgb(213, 229, 243);
+    padding: 10px;
+    border-radius: 5px;
+    width: 34%; margin: auto;
+}
+#div_box
+{
+    background-color: rgb(223, 234, 246);
+    padding: 87px;
+    border-radius: 5px;
+    width: 47%; margin: auto;
+    text-align: center;
+    margin: 30px auto;
+}
+.class_button
+{
+    background-color:rgb(114, 194, 255);
+    padding: 10px;
+    border-radius: 5px;
+    border-color: rgb(114, 194, 255);
+    color: black;
+}
+.class_button3
+{
+    background-color:rgb(99, 252, 127);
+    padding: 10px;
+    border-radius: 5px;
+    border-color: rgb(99, 252, 127);
+    color: black;
+}
+#div_btns
+{
+    margin: 0px 145px;
+}

@@ -1,0 +1,101 @@
+body {
+    width: 35%;
+    margin: auto;
+}
+
+.title_box
+{
+    color: rgb(0, 145, 255); 
+    font-size:32px;
+    background-color: rgb(105, 213, 240);
+    margin: auto;
+    padding: 25px 40px 25px 40px;
+    text-align: center;
+    border-radius: 5px;
+}
+
+.div_class
+{
+    background-color: rgb(213, 229, 243);
+    padding: 10px;
+    border-radius: 5px;
+    height: auto;
+    margin: auto;
+}
+
+.div_game
+{
+    background-color:white;
+    padding: 10px;
+    border-radius: 5px;
+    border: solid 1px rgb(234, 235, 234) ;
+    color: black;
+    padding: 5px;
+    height: auto;
+    margin: auto;
+}
+
+#inner_div
+{
+    margin: auto;
+    border: solid 1px rgb(234, 235, 234) ;
+    width: auto;
+    height: 480px;
+}
+
+.command
+{
+    border: solid 1px rgb(234, 235, 234) ;
+    padding: 3px;
+    width: auto;
+}
+
+.hidden
+{
+    display: none;
+}
+
+.visible
+{
+    display: contents;
+}
+
+.class_button
+{
+    background-color:rgb(114, 194, 255);
+    padding: 10px;
+    border-radius: 5px;
+    border-color: rgb(114, 194, 255);
+    color: black; 
+    margin: 0 auto; 
+    width: 100px;;
+}
+
+.btn_arrow
+{
+    background-color: aquamarine;
+    border-color: aquamarine;
+    border-radius: 5px;
+}
+#div_score
+{
+    color: rgb(86, 181, 253);
+    background-color: rgb(213, 229, 243);
+    font-weight:bold;
+    font-size: 32px;
+    margin: auto;
+    padding: 10px 15px 10px 15px;
+    border-radius: 5px;
+    text-align: center;
+}
+.class_lifes
+{
+    color: rgb(0, 153, 255);
+    background-color: rgb(85, 202, 248);
+    font-size: 32px;
+    font-weight:bold;
+    margin: auto;
+    padding: 25px 40px 25px 40px;
+    border-radius: 5px;
+    text-align: center;
+}

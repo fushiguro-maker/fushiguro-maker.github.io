@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>fruit catcher</title>
+        <meta charset="UTF-8"> 
+        <link rel="stylesheet" href="styleGame.css">
+        <script type="text/javascript" src="discoGame.js"></script>
+        <script type="text/javascript" src="square.js"></script>
+        
+
+    </head>
+    <body>
+        <h1 class="title_box">Fruit catcher </h1>
+        <div class="div_class"> 
+            <button id = "btn_start" class = "class_button">Inizia</button>
+            <button id="btn_reset" class="class_button">Reset</button>
+            <button id="btn_pause" class="class_button">Pausa</button>
+            <button id="btn_riprendi" class="class_button hidden" >Riprendi</button>
+        </div>
+        <div id="div_lifes" class="class_lifes">Lifes: 3</div>
+        <div id = "div_score">
+            <span id = "span_score">score: 0</span>
+            <span id="span_timer">time: 0</span>
+        </div>
+        <div id = "div_gameOver" class="class_lifes hidden">
+            <div>Hai perso! 😭</div>
+                <button id="btn_riprova" class="class_button">Riprova</button>
+                <button id="btn_esci" class="class_button">Esci</button>
+        </div>
+        <div class="div_game">
+            <div id="inner_div">
+                <canvas id="game_canvas"></canvas>
+            </div>
+            <div class="command">
+                <button id="btn_left" class = "btn_arrow">🢠</button>
+                <button id="btn_right" class = "btn_arrow">🢡</button>
+            </div>
+        </div>    
+    </body>  
+</html>
