@@ -5,8 +5,8 @@ window.onload = function () {
 
     function aggTimer() {
         timer++;
-        console.log(timer);
-        time.textContent = 'time: ' + timer;
+        time.textContent = '. ' + (timer % 60);
+        minutes.textContent = 'time: ' + (timer / 60 | 0);
     }
 
     function startGame() {
@@ -18,7 +18,6 @@ window.onload = function () {
         score = 0;
         timer = 0;
         life = 3;
-
         interval = setInterval(aggTimer, 1000);
     }
 
@@ -38,10 +37,13 @@ window.onload = function () {
             gameOver.setAttribute('class', 'hidden');
             on = false;
             active = false;
+            timer = 0;
+            time.textContent = '.' + timer;
+            //ctx.beginPath();
             ctx.clearRect(0, 0, canvas_width, canvas_height);
+            clearInterval(interval);
             score = 0;
             score2.textContent = 'score: ' + score;
-            console.log(score);
             life = 3;
             lifes.textContent = 'lifes: ' + life;
         }
@@ -55,11 +57,12 @@ window.onload = function () {
         right = document.getElementById('btn_right'),
         esci =  document.getElementById('btn_esci'),
         riprova =  document.getElementById('btn_riprova'),
-        //record = document.getElementById('btn_record'),
+        regole = document.getElementById('btn_regole'),
         canvas = document.getElementById('game_canvas'),
         inner = document.getElementById('inner_div'),
         score2 = document.getElementById('span_score'),
         time = document.getElementById('span_timer'),
+        minutes = document.getElementById('span_minutes'),
         lifes = document.getElementById('div_lifes'),
         gameOver = document.getElementById('div_gameOver'),
         ctx = canvas.getContext("2d");
@@ -73,6 +76,7 @@ window.onload = function () {
         
         let active = false;
         let on = false;
+        let on2 = true;
         
 
         let max_square = 15,
@@ -108,10 +112,11 @@ window.onload = function () {
               squareColor = 'gold',
               velSquare = 10;
         
-        startGame();
 
         start.addEventListener('click', function()
         {  
+            startGame();
+
             if(active == false && on == false)
             {
                 for (i = 0; i< max_square; i++)
@@ -120,9 +125,19 @@ window.onload = function () {
             }
         });
 
+        regole.addEventListener('click', function()
+        {
+            alert("Raccogli più frutti che puoi!\n" +
+                "- Le mele d'oro valgono 2 punti; \n" +
+                "- Le bombe ti fanno perdere un punto e una vita; \n" +
+                "- Tutti gli altri frutti valgono 1 punto;\n" + 
+                "- Ogni 100 punti guadagni una vita.\nBuon divertimento!")
+        });
+
         riprendi.addEventListener('click', function()
         {
             active = true;
+            setInterval(aggTimer, 1000);
             riprendi.setAttribute('class', 'hidden');
         });
 
@@ -132,14 +147,14 @@ window.onload = function () {
             let risp = (prompt("Sei sicuro di voler ricominciare? (rispondi con s/n)"));
             if(risp == "s")
             {
-               on = false;
-               ctx.clearRect(0, 0, canvas_width, canvas_height);
-               score = 0;
-               score2.textContent = 'score: ' + score;
-               console.log(score);
-               life = 0;
-               lifes.textContent = 'lifes: ' + life;
-               gameOver.setAttribute('class', 'hidden');
+                clearInterval(interval);
+                on = false;
+                ctx.clearRect(0, 0, canvas_width, canvas_height);
+                score = 0;
+                score2.textContent = 'score: ' + score;
+                console.log(score);
+                life = 3;
+                lifes.textContent = 'lifes: ' + life;
             }
             else if(risp == "n")  
                 active = true;     
@@ -149,7 +164,8 @@ window.onload = function () {
         pausa.addEventListener('click', function()
         {
             if (active)
-                {
+                {   
+                    clearInterval(interval);
                     on = true;
                     active = false;
                     riprendi.setAttribute('class', 'visible');
@@ -168,7 +184,6 @@ window.onload = function () {
 
         esci.addEventListener('click', function()
         {   
-            console.log("ciaoo");
             gameOver.setAttribute('class', 'hidden');
             on = false;
             active = false;
@@ -236,10 +251,6 @@ window.onload = function () {
                 {
                     // Disegna i quadrati
 
-                    /*ctx.beginPath();
-                    ctx.fillStyle = squares[i].getColor();
-                    ctx.rect(squares[i].getX(), squares[i].getY(), squares[i].getWidth(), squares[i].getHeigth());
-                    ctx.fill();*/
                     if(squares[i].getColor() =='apple')
                         ctx.drawImage(image, squares[i].getX(), squares[i].getY(), squares[i].getWidth(), squares[i].getHeigth());
                     if(squares[i].getColor() =='banana')
@@ -262,7 +273,7 @@ window.onload = function () {
                  
                     // Muove i quadrati
 
-                    let newY = squares[i].getY() + getRandomInt(6) + (score ? score * 0.05 : 0.5);
+                    let newY = squares[i].getY() + getRandomInt(6) + (score ? score * 0.01 : 0.5);
                     squares[i].setY(newY);
                     if(squares[i].getY() > canvas_height) 
                         squares[i].setY(0);
@@ -274,16 +285,6 @@ window.onload = function () {
                         if(bigSquare.getX() <= squares[i].getX() && 
                             bigSquare.getX() + squareWidth >= squares[i].getX() + 40)
                         {   
-                            /*if (colors == 'green')
-                            {
-                                score += 2;
-                                console.log(score);
-                            }
-                            else
-                            {
-                                score += 100;
-                                console.log(score);
-                            }*/
                             console.log(squares[i].getColor());
                             if((squares[i].getColor()) == 'bomb')
                             {
@@ -310,29 +311,28 @@ window.onload = function () {
                             }
                     }
                     if(life == 0)
+                    {
+                        //ctx.clearRect(0, 0, canvas_width, canvas_height);
+                        on = false;
+                        endGame();
+                    }
+                    if(score != 0 && (score % 100) == 0 && on2 == true)
+                    {   
+                        on2 = false;
+                        life += 1;
+                        lifes.textContent = 'lifes: ' + life;
+                    }
+                    if((score % 100) != 0)
                         {
-                            ctx.clearRect(0, 0, canvas_width, canvas_height);
-                            on = false;
-                            //gameOver.setAttribute('class', 'visible');
-                            //gameOver.setAttribute('class', 'class_button');
-                            endGame();
-                        }
+                            on2 = true;
+                        } 
                 }
 
                 // Disegna "player"
                 ctx.beginPath();
                 ctx.drawImage(basket, bigSquare.getX(), bigSquare.getY(), bigSquare.getWidth(), bigSquare.getHeigth());
-                /*ctx.fillStyle = bigSquare.getColor();
-                ctx.rect(bigSquare.getX(), bigSquare.getY(), bigSquare.getWidth(), bigSquare.getHeigth());
-                ctx.fill();*/
-                
             }
-
-           
 
             requestAnimationFrame(update);
         }
-
 }
-//<button id = "btn_record" class = "class_button">Record</button
-// rgb(0, 153, 255);
